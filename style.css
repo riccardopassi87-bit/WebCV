@@ -6,8 +6,9 @@
 body {
   background-color: #444;
   width: 100%;
+  height: 100vh;
   min-width: 1024px;
-  aspect-ratio: 16/9 auto;
+  aspect-ratio: 16/9; /* will be bcak!!! */
 }
 
 /* FROM HERE - all background colors are place holders!!! */
@@ -18,6 +19,7 @@ main {
   background-color: antiquewhite;
   display: flex;
   justify-content: center;
+  font-family: Ink Free;
 }
 
 #name {
@@ -26,18 +28,43 @@ main {
   height: 10%;
 }
 
+h1 {
+  font-weight: 500;
+  font-size: 5rem;
+  letter-spacing: 5px;
+  margin-left: 5%;
+}
+
 #underName {
   background-color: greenyellow;
   width: 100%;
   height: 5%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-#underName button{
-    height: 100%;
-    width: 15%;
-    font-size: 2rem;
+#underName p {
+  font-size: 1.5rem;
+  margin: 0 1%;
+}
+
+a{
+    all: unset;
+}
+
+#underName span {
+  font-size: 1.5rem;
+}
+
+#download:hover {
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+#underName span:hover {
+  font-weight: bolder;
+  cursor: pointer;
 }
 
 /* MAIN CONTENT */
@@ -59,15 +86,23 @@ main {
   background-color: aqua;
 }
 
-#photo img{
-    width: 100%;
-    height: 100%;
+#photo img {
+  width: 100%;
+  height: 100%;
 }
 
 #navMenu {
   width: 100%;
   height: 75%;
   background-color: brown;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#navMenu p{
+font-size: 3rem;
 }
 
 /* RIGHT SECTION */
@@ -81,4 +116,8 @@ main {
   background-color: burlywood;
   width: 100%;
   height: 5%;
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
