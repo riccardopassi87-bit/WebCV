@@ -1,14 +1,30 @@
+@font-face {
+  font-family: myFont;
+  src: url(fonts/IBMPlexSans_Condensed-Regular.ttf);
+}
+
 * {
   font-size: 62.5%; /* 1 em 10px scale */
   margin: 0;
 }
 
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
 body {
   background-color: #444;
   width: 100%;
-  height: 100vh;
-  min-width: 1024px;
-  aspect-ratio: 16/9; /* will be bcak!!! */
+  min-width: 1240px;
+  max-width: 3840px;
+  min-height: 576px;
+  max-height: 2160px;
+  max-height: 100vh;
+  aspect-ratio: 16/9;
+  height: auto;
 }
 
 /* FROM HERE - all background colors are place holders!!! */
@@ -16,27 +32,34 @@ body {
 main {
   width: 100%;
   height: 100%;
-  background-color: antiquewhite;
+  background-image: url(assets/bgimage.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   justify-content: center;
-  font-family: Ink Free;
+  font-family: myFont;
 }
 
 #name {
-  background-color: blueviolet;
+  background-color: #333;
+  opacity: 0.8;
+  color: antiquewhite;
   width: 100%;
   height: 10%;
+  display: flex;
+  align-items: center;
 }
 
 h1 {
   font-weight: 500;
-  font-size: 5rem;
+  font-size: 3000%;
   letter-spacing: 5px;
   margin-left: 5%;
 }
 
 #underName {
-  background-color: greenyellow;
+  background-color: antiquewhite;
+  opacity: 0.8;
   width: 100%;
   height: 5%;
   display: flex;
@@ -45,16 +68,16 @@ h1 {
 }
 
 #underName p {
-  font-size: 1.5rem;
+  font-size: 2000%;
   margin: 0 1%;
 }
 
-a{
-    all: unset;
+a {
+  all: unset;
 }
 
 #underName span {
-  font-size: 1.5rem;
+  font-size: 100%;
 }
 
 #download:hover {
@@ -69,21 +92,20 @@ a{
 
 /* MAIN CONTENT */
 #content {
-  background-color: antiquewhite;
   width: 100%;
   height: 85%;
 }
 
 /* LEFT SECTION */
 #left {
-  background-color: mediumseagreen;
-  width: 25%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 #photo {
   width: 100%;
-  height: 25%;
-  background-color: aqua;
+  flex: 1;
 }
 
 #photo img {
@@ -93,31 +115,44 @@ a{
 
 #navMenu {
   width: 100%;
-  height: 75%;
-  background-color: brown;
+  flex: 3;
+  background-color: #333;
+  opacity: 0.9;
+  color: antiquewhite;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
 }
 
-#navMenu p{
-font-size: 3rem;
+#navMenu p {
+  font-size: 2200%;
+  width: 100%;
+  text-align: center;
+}
+
+#navMenu p:hover {
+  font-size: 2300%;
+  cursor: pointer;
 }
 
 /* RIGHT SECTION */
 
 #right {
-  width: 75%;
-  background-color: aliceblue;
+  flex: 3;
 }
 
 #contacts {
-  background-color: burlywood;
+  background-color: antiquewhite;
+  opacity: 0.8;
   width: 100%;
   height: 5%;
-  font-size: 2rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+#contacts span {
+  font-size: 1300%;
+  color: black;
 }
