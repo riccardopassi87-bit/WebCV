@@ -128,15 +128,22 @@ main {
   background-color: blue;
   display: flex;
   justify-content: flex-end;
-  gap: 2%;
+  gap: 1%;
+}
+
+#close-window:hover {
+  cursor: pointer;
+  background-color: red;
 }
 
 #taskBar span {
+  width: 3%;
   font-size: 200%;
   color: white;
   font-weight: bolder;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
 }
 
 #languages, #preload {
@@ -166,7 +173,7 @@ h4{
   margin-left: 2%;
 }
 
-/* RIGHT SECTION */
+/* LOWER SECTION */
 
 #contacts {
   width: 100%;
