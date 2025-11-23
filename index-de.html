@@ -10,9 +10,17 @@
 
 <body>
     <div id="top">
-        <div id="name">
-            <h1>Riccardo Passi</h1>
-        </div>
+            <h1>Riccardo Passi</h1>  
+    </div>
+
+    <main>
+        <button id="power">&#9888; POWER ON &#9888;</button>
+
+        <div id="monitor">
+
+            <div id="taskBar">
+                <span>&#x2014;</span><span>&#128471;</span><span id="close-window">X</span>
+            </div>
 
         <nav id="navMenu">
             <span lang="de" data-lang-group="nav1">Berufserfahrungen</span>
@@ -33,16 +41,10 @@
             <span lang="de" data-lang-group="nav6">Sprachen</span>
             <span lang="en" data-lang-group="nav6">Languages</span>
         </nav>  
-    </div>
 
-    <main>
-        <button id="power">&#9888; POWER ON &#9888;</button>
 
-        <div id="monitor">
 
-            <div id="taskBar">
-                <span>&#x2014;</span><span>&#128471;</span><span id="close-window">X</span>
-            </div>
+
 
             <!-- MONITOR CONTENT -->
 
@@ -53,10 +55,10 @@
             <div id="preload">
 
                 <span>
-                    <h2 lang="de" data-lang-group="start">
+                    <h2 id="loadDe" lang="de" data-lang-group="start">
                         >> System initialisierung...
                     </h2>
-                    <h2 lang="en" data-lang-group="start">
+                    <h2 id="loadEn" lang="en" data-lang-group="start">
                         >> Initialising system...
                     </h2>
                 </span>
@@ -119,8 +121,8 @@
         <span><a href="mailto:riccardo.passi87@gmail.com">riccardo.passi87@gmail.com</a></span>
 
         <div>
-            <span class="lang-selector" data-lang="en">En</span> 🌐 
-            <span class="lang-selector" data-lang="de">De</span>
+            <span id="english" class="lang-selector" data-lang="en">En</span> 🌐 
+            <span id="german" class="lang-selector" data-lang="de">De</span>
         </div>
     </div>
 

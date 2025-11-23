@@ -36,50 +36,21 @@ body {
   background-color: #222;
   color: white;
   width: 100%;
-  height: 15%;
-  display: flex;
-  flex-direction: column;
-}
-
-#name {
-  flex: 2;
-  font-weight: 500;
-  letter-spacing: 25px;
-  margin-left: 3%;
+  height: 10%;
   display: flex;
   align-items: center;
 }
 
 h1 {
+  margin-left: 3%;
   font-size: 400%;
-  font-weight: 200;
-}
-
-#navMenu {
-  flex: 1;
-  width: 100%;
-  background-color: white;
-  color: #222;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-#navMenu span {
-  font-size: 150%;
-  text-align: center;
-  padding: auto;
-  display: flex;
-  align-items: center;
-}
-
-#navMenu span:hover {
-  font-weight: bolder;
-  cursor: pointer;
+  font-weight: 100;
+  letter-spacing: 25px;
 }
 
 main {
   width: 100%;
-  height: 80%;
+  height: 85%;
   background-image: url(assets/bgimage.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -93,7 +64,7 @@ main {
 #power{
   background-color: #222;
   width: 14.5%;
-  height: 32%;
+  height: 30%;
   color: white;
   font-size: 150%;
   border-radius: 400px;
@@ -105,7 +76,7 @@ main {
 
 #power:active{
   width: 13%;
-  height: 29%;
+  height: 26.5%;
   font-size: 135%;
   color: rgb(128, 230, 69);
 }
@@ -144,6 +115,29 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#navMenu {
+  width: 96%;
+  height: 6%;
+  color: rgb(128, 230, 69);
+  display: flex;
+  justify-content: space-between;
+  margin: 0 2%;
+}
+
+#navMenu span {
+  font-size: 150%;
+  font-weight: 500;
+  text-align: center;
+  padding: auto;
+  display: flex;
+  align-items:end;
+}
+
+#navMenu span:hover {
+  font-weight: bolder;
+  cursor: pointer;
 }
 
 #languages, #preload {
