@@ -17,6 +17,12 @@ $(document).ready(function () {
 
 // POWER BUTTON
 
-//$('#monitor').hide();
-//$('#languages').hide();
-$('#power').hide();
+$('#preload').hide();
+$('#monitor').hide();
+$('#languages').hide();
+
+$('#power').on('click', function(){
+    $('#power').hide();
+    $('#monitor').show();
+    $('#preload').show();
+})

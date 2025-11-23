@@ -139,7 +139,7 @@ main {
   align-items: flex-start;
 }
 
-#languages {
+#languages, #preload {
   width: 96%;
   height: 86%;
   padding: 2%;
