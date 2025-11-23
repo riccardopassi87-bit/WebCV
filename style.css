@@ -64,7 +64,7 @@ h1 {
   justify-content: space-evenly;
 }
 
-#navMenu p {
+#navMenu span {
   font-size: 150%;
   text-align: center;
   padding: auto;
@@ -72,7 +72,7 @@ h1 {
   align-items: center;
 }
 
-#navMenu p:hover {
+#navMenu span:hover {
   font-weight: bolder;
   cursor: pointer;
 }
@@ -131,7 +131,7 @@ main {
   gap: 2%;
 }
 
-#taskBar p {
+#taskBar span {
   font-size: 200%;
   color: white;
   font-weight: bolder;
@@ -164,11 +164,6 @@ h3{
 h4{
   font-size: 140%;
   margin-left: 2%;
-}
-
-#mamma{
-  width: 3%;
-  height: 55%;
 }
 
 /* RIGHT SECTION */

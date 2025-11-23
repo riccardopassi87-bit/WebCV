@@ -1,16 +1,22 @@
-/* LANGUAGE SELECTOR */
+// LANGUAGE SELECTOR
 
-document.getElementById('english').addEventListener('click', function(event) {
-    event.preventDefault();
-    window.location.href = 'index-en.html';
+$(".lang-selector").on("click", function () {
+    const selected = $(this).data("lang");
+
+    $("[data-lang-group][lang]").hide();
+
+    $(`[data-lang-group][lang='${selected}']`).show();
 });
 
-document.getElementById('german').addEventListener('click', function(event){
-    event.preventDefault();
-    window.location.href = 'index-de.html';
+// DEFAULT LANGUAGE
+$(document).ready(function () {
+    $("[data-lang-group][lang='en']").hide();
+    $("[data-lang-group][lang='de']").show();
 });
 
-/* POWER BUTTON */
 
-$('#monitor').hide();
-$('#languages').hide();
+// POWER BUTTON
+
+//$('#monitor').hide();
+//$('#languages').hide();
+$('#power').hide();
