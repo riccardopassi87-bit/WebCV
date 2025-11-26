@@ -6,36 +6,46 @@ let german = true;
 function getLang() {
     return german ? "de" : "en";
 }
-/* --------------------------------------------------
-    LANGUAGE SELECTOR
--------------------------------------------------- */
-$(".lang-selector").on("click", function () {
-    const selected = $(this).data("lang");
-
-    german = (selected === "de");  // keep animation system in sync
-
-    $("[data-lang-group][lang]").hide();
-    $(`[data-lang-group][lang='${selected}']`).show();
-});
 
 /* --------------------------------------------------
     LANGUAGE FLAG BUTTONS
 -------------------------------------------------- */
-$('#german').on('click', function () { german = true; });
-$('#english').on('click', function () { german = false; });
+$('#german').on('click', function (){
+    german = true;
+    updateLanguage();
+});
+
+$('#english').on('click', function (){
+    german = false;
+    updateLanguage();
+});
+
+/* --------------------------------------------------
+    LANGUAGE SELECTOR
+-------------------------------------------------- */
+function updateLanguage() {
+    const lang = getLang();
+    $("[data-lang-group][lang]").hide();
+    $(`[data-lang-group][lang='${lang}']`).show();
+}
 
 /* --------------------------------------------------
     INITIAL STATUS
 -------------------------------------------------- */
 $(document).ready(function () {
-    $("[data-lang-group][lang='en']").hide();
-    $("[data-lang-group][lang='de']").show();
+    updateLanguage();
 
     $('#power').show();
     $('#monitor').hide();
     $('#navMenu').hide();
     $('#preload').hide();
     $('#languages').hide();
+
+    //TEXT CACHE
+    $('#loadDe, #loadEn, #langDe, #langEn').each(function () {
+        $(this).data('origText', $(this).text().trim());
+    });
+
 });
 
 /* --------------------------------------------------
@@ -50,10 +60,10 @@ $('#power').on('click', function () {
 });
 
 /* --------------------------------------------------
-    SHOW LANGUAGES (attach handler correctly)
+    SHOW LANGUAGES
 -------------------------------------------------- */
-$('#open-languages').on('click', function () {
-    showLanguages();
+$('.open-languages').on('click', function() {
+    showLanguages('languages', 'lng');
 });
 
 /* --------------------------------------------------
@@ -73,17 +83,17 @@ function preloader() {
     
     const lang = getLang();
     const elementId = lang === "de" ? "loadDe" : "loadEn";
-    const textToAnimate = $("#" + elementId).text();
+    const textToAnimate = $("#" + elementId).data('origText');
     
-    const title = `h4[data-lang-group='start'][lang='${lang}']`;
-
     $("[data-lang-group='start'][lang]").hide();
     $("#" + elementId).show().text('');
 
+    const title = `h4[data-lang-group='start'][lang='${lang}']`;
+
     charAnimation(elementId, textToAnimate, 20, function () {
-        setTimeout(function () {
+        setTimeout(() => {
             $(title).show();
-            setTimeout(function () {
+            setTimeout(() => {
                 $('#preload').hide();
                 $('#navMenu').show();
             }, 1500);
@@ -94,24 +104,24 @@ function preloader() {
 /* --------------------------------------------------
     LANGUAGE ANIMATION PANEL
 -------------------------------------------------- */
-function showLanguages() {
-    $('#languages').toggle();
+function showLanguages(boxId, group) {
 
     const lang = getLang();
     const elementId = lang === "de" ? "langDe" : "langEn";
+    $("#" + boxId).toggle();
+    $(`[data-lang-group='${group}'][lang]`).hide();
 
-    $("#" + elementId).show();                  // show first
-    const textToAnimate = $("#" + elementId).text(); // then read text
-    $("#" + elementId).text(''); 
+    
+    const $el = $("#" + elementId);
+    $el.text('').show();
 
-    const title = `h3[data-lang-group='lng'][lang='${lang}']`;
-    const subtitle = `h4[data-lang-group='lng'][lang='${lang}']`;
-
-    $("[data-lang-group='lng'][lang]").hide();
-    $("#" + elementId).show().text('');
-
+    const title = `h3[data-lang-group='${group}'][lang='${lang}']`;
+    const subtitle = `h4[data-lang-group='${group}'][lang='${lang}']`;
+    
+    const textToAnimate = $el.data('origText');
+  
     charAnimation(elementId, textToAnimate, 20, function () {
-        setTimeout(function () {
+        setTimeout(() => {
             $(title).show();
             $(subtitle).show();
         }, 300);
@@ -129,10 +139,9 @@ function charAnimation(elementId, text, delay, onComplete) {
             $("#" + elementId).append(text.charAt(i));
             i++;
             setTimeout(type, delay);
-        } else {
-            if (onComplete) onComplete();
+        } else if (onComplete) {
+            onComplete();
         }
     }
-
     type();
 }
