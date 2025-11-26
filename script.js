@@ -97,7 +97,7 @@ function preloader() {
                 $('#preload').hide();
                 $('#navMenu').show();
             }, 1500);
-        }, 250);
+        }, 800);
     });
 }
 
@@ -108,23 +108,28 @@ function showLanguages(boxId, group) {
 
     const lang = getLang();
     const elementId = lang === "de" ? "langDe" : "langEn";
-    $("#" + boxId).toggle();
+    $("#" + boxId).show();
     $(`[data-lang-group='${group}'][lang]`).hide();
 
-    
-    const $el = $("#" + elementId);
-    $el.text('').show();
+    const $title = $("#" + elementId);
+    const textToAnimate = $title.data('origText');
+    $title.text('').show();
 
-    const title = `h3[data-lang-group='${group}'][lang='${lang}']`;
-    const subtitle = `h4[data-lang-group='${group}'][lang='${lang}']`;
-    
-    const textToAnimate = $el.data('origText');
-  
     charAnimation(elementId, textToAnimate, 20, function () {
+        
         setTimeout(() => {
-            $(title).show();
-            $(subtitle).show();
-        }, 300);
+            const popItems = $("#" + boxId + " > span").slice(1);
+            const langPopItems = popItems.map(function (){
+                return $(this).children(`[lang='${lang}']`);
+            }).get();
+
+            function showItems(i){
+                if (i > langPopItems.length) return;
+                langPopItems[i].show();
+                setTimeout(() => showItems(i + 1), 200);
+            }
+            showItems(0);
+        }, 1000);
     });
 }
 
