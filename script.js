@@ -1,83 +1,138 @@
-// LANGUAGE SELECTOR
+/* --------------------------------------------------
+    GLOBAL LANGUAGE FLAG
+-------------------------------------------------- */
+let german = true;
 
+function getLang() {
+    return german ? "de" : "en";
+}
+/* --------------------------------------------------
+    LANGUAGE SELECTOR
+-------------------------------------------------- */
 $(".lang-selector").on("click", function () {
     const selected = $(this).data("lang");
 
-    $("[data-lang-group][lang]").hide();
+    german = (selected === "de");  // keep animation system in sync
 
+    $("[data-lang-group][lang]").hide();
     $(`[data-lang-group][lang='${selected}']`).show();
 });
 
-// DEFAULT LANGUAGE
+/* --------------------------------------------------
+    LANGUAGE FLAG BUTTONS
+-------------------------------------------------- */
+$('#german').on('click', function () { german = true; });
+$('#english').on('click', function () { german = false; });
+
+/* --------------------------------------------------
+    INITIAL STATUS
+-------------------------------------------------- */
 $(document).ready(function () {
     $("[data-lang-group][lang='en']").hide();
     $("[data-lang-group][lang='de']").show();
+
+    $('#power').show();
+    $('#monitor').hide();
+    $('#navMenu').hide();
+    $('#preload').hide();
+    $('#languages').hide();
 });
 
-// FLAG SYSTEM FOR ANIMATIONS
+/* --------------------------------------------------
+    POWER BUTTON
+-------------------------------------------------- */
+$('#power').on('click', function () {
+    $('#power').hide();
+    $('#monitor').show();
 
-let german = true;
-
-$('#german').on('click', function(){
-    german = true;
-})
-
-$('#english').on('click', function(){
-    german = false;
-})
-
-
-$('#power').show();
-$('#monitor').hide();
-$('#navMenu').hide();
-$('#preload').hide();
-$('#languages').hide();
-
-// POWER BUTTON
-
-$('#power').on('click', function(){
-    $('#power').toggle();
-    $('#monitor').toggle();
     $('#preload').show();
-    
-    const elementId = german ? 'loadDe' : 'loadEn';
-    const systemReady = "h4[data-lang-group='start'][lang='" + (german ? "de" : "en") + "']";
+    preloader();
+});
 
-    const textToAnimate = $('#' + elementId).text();
+/* --------------------------------------------------
+    SHOW LANGUAGES (attach handler correctly)
+-------------------------------------------------- */
+$('#open-languages').on('click', function () {
+    showLanguages();
+});
+
+/* --------------------------------------------------
+    CLOSE WINDOW
+-------------------------------------------------- */
+$('#close-window').on('click', function () {
+    $('#monitor').hide();
+    $('#power').show();
+    $('#navMenu').hide();
+    $('#languages').hide();
+});
+
+/* --------------------------------------------------
+    PRELOADER
+-------------------------------------------------- */
+function preloader() {
+    
+    const lang = getLang();
+    const elementId = lang === "de" ? "loadDe" : "loadEn";
+    const textToAnimate = $("#" + elementId).text();
+    
+    const title = `h4[data-lang-group='start'][lang='${lang}']`;
 
     $("[data-lang-group='start'][lang]").hide();
-    $('#' + elementId).show().text('');
+    $("#" + elementId).show().text('');
 
-    charAnimation(elementId, textToAnimate, 25, function() {
-        setTimeout(function (){
-            $(systemReady).show();
+    charAnimation(elementId, textToAnimate, 20, function () {
+        setTimeout(function () {
+            $(title).show();
             setTimeout(function () {
                 $('#preload').hide();
                 $('#navMenu').show();
-            }, 2000);
-        }, 1000);
-    });    
-})
+            }, 1500);
+        }, 250);
+    });
+}
 
-$('#close-window').on('click', function(){
-    $('#monitor').toggle();
-    $('#power').toggle();
-    $('#navMenu').hide();
-    $('#preload').hide();
-})
+/* --------------------------------------------------
+    LANGUAGE ANIMATION PANEL
+-------------------------------------------------- */
+function showLanguages() {
+    $('#languages').toggle();
 
-// 1 BY 1 CHAR ANIMATION
-function charAnimation(elementId, text, delay, onComplete){
+    const lang = getLang();
+    const elementId = lang === "de" ? "langDe" : "langEn";
+
+    $("#" + elementId).show();                  // show first
+    const textToAnimate = $("#" + elementId).text(); // then read text
+    $("#" + elementId).text(''); 
+
+    const title = `h3[data-lang-group='lng'][lang='${lang}']`;
+    const subtitle = `h4[data-lang-group='lng'][lang='${lang}']`;
+
+    $("[data-lang-group='lng'][lang]").hide();
+    $("#" + elementId).show().text('');
+
+    charAnimation(elementId, textToAnimate, 20, function () {
+        setTimeout(function () {
+            $(title).show();
+            $(subtitle).show();
+        }, 300);
+    });
+}
+
+/* --------------------------------------------------
+    CHARACTER-BY-CHARACTER TYPING ANIMATION
+-------------------------------------------------- */
+function charAnimation(elementId, text, delay, onComplete) {
     let i = 0;
 
     function type() {
-        if(i < text.length) {
-            $('#' + elementId).append(text.charAt(i));
+        if (i < text.length) {
+            $("#" + elementId).append(text.charAt(i));
             i++;
             setTimeout(type, delay);
         } else {
             if (onComplete) onComplete();
         }
     }
+
     type();
 }
