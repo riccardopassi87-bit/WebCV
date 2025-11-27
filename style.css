@@ -63,10 +63,10 @@ main {
 
 #power{
   background-color: #222;
-  width: 14.5%;
+  width: 14%;
   height: 30%;
   color: white;
-  font-size: 150%;
+  font-size: 130%;
   border-radius: 400px;
 }
 
@@ -75,9 +75,9 @@ main {
 }
 
 #power:active{
-  width: 13%;
-  height: 26.5%;
-  font-size: 135%;
+  width: 12.5%;
+  height: 27%;
+  font-size: 125%;
   color: rgb(128, 230, 69);
 }
 
@@ -122,8 +122,10 @@ main {
   height: 6%;
   color: rgb(128, 230, 69);
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin: 0 2%;
+  padding:0 2%;
+  border-bottom-style: dashed;
 }
 
 #navMenu span {
@@ -136,11 +138,12 @@ main {
 }
 
 #navMenu span:hover {
+  color:rgb(147, 230, 69) ;
   font-weight: bolder;
   cursor: pointer;
 }
 
-#languages, #preload {
+#languages, #preload, #bisComp {
   width: 96%;
   height: 86%;
   padding: 2%;

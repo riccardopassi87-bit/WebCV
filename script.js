@@ -40,9 +40,10 @@ $(document).ready(function () {
     $('#navMenu').hide();
     $('#preload').hide();
     $('#languages').hide();
+    $('#bisComp').hide();
 
-    //TEXT CACHE
-    $('#loadDe, #loadEn, #langDe, #langEn').each(function () {
+    //TEXT CACHE (ALL CONTENT)
+    $('#loadDe, #loadEn, #langDe, #langEn, #compDe, #compEn').each(function () {
         $(this).data('origText', $(this).text().trim());
     });
 
@@ -63,7 +64,16 @@ $('#power').on('click', function () {
     SHOW LANGUAGES
 -------------------------------------------------- */
 $('.open-languages').on('click', function() {
-    showLanguages('languages', 'lng');
+    closeAll();
+    showLanguages('languages', 'lng', 'langDe', 'langEn');
+});
+
+/* --------------------------------------------------
+    SHOW BIS COMPETENCES
+-------------------------------------------------- */
+$('.open-bis').on('click', function() {
+    closeAll();
+    showLanguages('bisComp', 'bis', 'compDe', 'compEn');
 });
 
 /* --------------------------------------------------
@@ -73,7 +83,7 @@ $('#close-window').on('click', function () {
     $('#monitor').hide();
     $('#power').show();
     $('#navMenu').hide();
-    $('#languages').hide();
+    closeAll();
 });
 
 /* --------------------------------------------------
@@ -104,10 +114,10 @@ function preloader() {
 /* --------------------------------------------------
     LANGUAGE ANIMATION PANEL
 -------------------------------------------------- */
-function showLanguages(boxId, group) {
+function showLanguages(boxId, group, case1, case2) {
 
     const lang = getLang();
-    const elementId = lang === "de" ? "langDe" : "langEn";
+    const elementId = lang === "de" ? case1 : case2;
     $("#" + boxId).show();
     $(`[data-lang-group='${group}'][lang]`).hide();
 
@@ -149,4 +159,13 @@ function charAnimation(elementId, text, delay, onComplete) {
         }
     }
     type();
+}
+
+/* --------------------------------------------------
+    CLOSE ALL CONTENT FALLBACK
+-------------------------------------------------- */
+
+function closeAll(){
+    $('#languages').hide();
+    $('#bisComp').hide();
 }
