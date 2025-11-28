@@ -41,9 +41,10 @@ $(document).ready(function () {
     $('#preload').hide();
     $('#languages').hide();
     $('#bisComp').hide();
+    $('#softSkills').hide();
 
     //TEXT CACHE (ALL CONTENT)
-    $('#loadDe, #loadEn, #langDe, #langEn, #compDe, #compEn').each(function () {
+    $('#loadDe, #loadEn, #langDe, #langEn, #compDe, #compEn, #softDe, #softEn').each(function () {
         $(this).data('origText', $(this).text().trim());
     });
 
@@ -61,19 +62,27 @@ $('#power').on('click', function () {
 });
 
 /* --------------------------------------------------
-    SHOW LANGUAGES
--------------------------------------------------- */
-$('.open-languages').on('click', function() {
-    closeAll();
-    showLanguages('languages', 'lng', 'langDe', 'langEn');
-});
-
-/* --------------------------------------------------
     SHOW BIS COMPETENCES
 -------------------------------------------------- */
 $('.open-bis').on('click', function() {
     closeAll();
     showLanguages('bisComp', 'bis', 'compDe', 'compEn');
+});
+
+/* --------------------------------------------------
+    SHOW BIS COMPETENCES
+-------------------------------------------------- */
+$('.open-skills').on('click', function() {
+    closeAll();
+    showLanguages('softSkills', 'skl', 'softDe', 'softEn');
+});
+
+/* --------------------------------------------------
+    SHOW LANGUAGES
+-------------------------------------------------- */
+$('.open-languages').on('click', function() {
+    closeAll();
+    showLanguages('languages', 'lng', 'langDe', 'langEn');
 });
 
 /* --------------------------------------------------
@@ -168,4 +177,5 @@ function charAnimation(elementId, text, delay, onComplete) {
 function closeAll(){
     $('#languages').hide();
     $('#bisComp').hide();
+    $('#softSkills').hide();
 }
