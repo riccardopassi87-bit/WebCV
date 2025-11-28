@@ -149,7 +149,7 @@ main {
   cursor: pointer;
 }
 
-#languages, #preload, #bisComp, #softSkills {
+#languages, #preload, #bisComp, #softSkills, #education {
   width: 96%;
   height: 86%;
   padding: 2%;
