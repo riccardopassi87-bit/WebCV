@@ -42,7 +42,7 @@ $(document).ready(function () {
     closeAll();
 
     //TEXT CACHE (ALL CONTENT)
-    $('#loadDe, #loadEn, #langDe, #langEn, #compDe, #compEn, #softDe, #softEn, #educDe, #educEn').each(function () {
+    $('#loadDe, #loadEn, #langDe, #langEn, #compDe, #compEn, #softDe, #softEn, #educDe, #educEn, #extrDe, #extrEn, #jobsDe, #jobsEn').each(function () {
         $(this).data('origText', $(this).text().trim());
     });
 
@@ -59,11 +59,19 @@ $('#power').on('click', function () {
 });
 
 /* --------------------------------------------------
+    SHOW JOBS
+-------------------------------------------------- */
+$('.open-jobs').on('click', function() {
+    closeAll();
+    showContent('jobs', 'job', 'jobsDe', 'jobsEn');
+});
+
+/* --------------------------------------------------
     SHOW EDUCATION
 -------------------------------------------------- */
 $('.open-education').on('click', function() {
     closeAll();
-    showLanguages('education', 'edu', 'educDe', 'educEn');
+    showContent('education', 'edu', 'educDe', 'educEn');
 });
 
 /* --------------------------------------------------
@@ -71,7 +79,7 @@ $('.open-education').on('click', function() {
 -------------------------------------------------- */
 $('.open-bis').on('click', function() {
     closeAll();
-    showLanguages('bisComp', 'bis', 'compDe', 'compEn');
+    showContent('bisComp', 'bis', 'compDe', 'compEn');
 });
 
 /* --------------------------------------------------
@@ -79,7 +87,15 @@ $('.open-bis').on('click', function() {
 -------------------------------------------------- */
 $('.open-skills').on('click', function() {
     closeAll();
-    showLanguages('softSkills', 'skl', 'softDe', 'softEn');
+    showContent('softSkills', 'skl', 'softDe', 'softEn');
+});
+
+/* --------------------------------------------------
+    SHOW EXTRA SKILLS
+-------------------------------------------------- */
+$('.open-extra').on('click', function() {
+    closeAll();
+    showContent('extra', 'ext', 'extrDe', 'extrEn');
 });
 
 /* --------------------------------------------------
@@ -87,7 +103,7 @@ $('.open-skills').on('click', function() {
 -------------------------------------------------- */
 $('.open-languages').on('click', function() {
     closeAll();
-    showLanguages('languages', 'lng', 'langDe', 'langEn');
+    showContent('languages', 'lng', 'langDe', 'langEn');
 });
 
 /* --------------------------------------------------
@@ -128,7 +144,7 @@ function preloader() {
 /* --------------------------------------------------
     LANGUAGE ANIMATION PANEL
 -------------------------------------------------- */
-function showLanguages(boxId, group, case1, case2) {
+function showContent(boxId, group, case1, case2) {
 
     const lang = getLang();
     const elementId = lang === "de" ? case1 : case2;
@@ -141,6 +157,9 @@ function showLanguages(boxId, group, case1, case2) {
 
     charAnimation(elementId, textToAnimate, 20, function () {
         
+        const container = $("#" + boxId)[0];
+        container.scrollTop = container.scrollHeight;
+
         setTimeout(() => {
             const popItems = $("#" + boxId + " > span").slice(1);
             const langPopItems = popItems.map(function (){
@@ -150,6 +169,7 @@ function showLanguages(boxId, group, case1, case2) {
             function showItems(i){
                 if (i > langPopItems.length) return;
                 langPopItems[i].show();
+                container.scrollTop = container.scrollHeight;
                 setTimeout(() => showItems(i + 1), 200);
             }
             showItems(0);
@@ -178,10 +198,11 @@ function charAnimation(elementId, text, delay, onComplete) {
 /* --------------------------------------------------
     CLOSE ALL CONTENT FALLBACK
 -------------------------------------------------- */
-
 function closeAll(){
     $('#languages').hide();
     $('#bisComp').hide();
     $('#softSkills').hide();
     $('#education').hide();
+    $('#extra').hide();
+    $('#jobs').hide();
 }

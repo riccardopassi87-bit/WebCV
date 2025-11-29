@@ -92,20 +92,54 @@ main {
   height: 90%;
   background-color: #111;
   border-style: solid;
-  border-width: 10px;
-  border-color: rgb(235, 235, 235);
-  border-radius: 5px;
+  border-width: 4px;
+  border-color: #c0c0c0;
+  box-shadow: inset 2px 2px #666; inset: -2px -2px #333;
+  border-radius: 0;
+  overflow: hidden;
   color: rgb(128, 230, 69);
 }
 
 #taskBar {
-  width: 99%;
+  width: 100%;
   height: 6%;
-  padding-right: 1%;
-  background-color: blue;
+  background-color: #000080;
   display: flex;
-  justify-content: flex-end;
-  gap: 1%;
+  justify-content: space-between;
+  border-bottom: 2px solid #808080;
+}
+
+#icons{
+  width: 11%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#icons span{
+  width: 33%;
+  height:100%;
+  background-color: #c0c0c0;
+  font-size: clamp(1.4rem, 1.8vw, 2rem);
+  color: #FFFFFF;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #FFFFFF;
+  border-left: 1px solid #FFFFFF;
+  border-bottom: 1px solid #808080;
+  border-right: 1px solid #808080;
+}
+
+#version{
+  width: 25%;
+  height: 100%;
+  color: white;
+  font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+  display: flex;
+  align-items: center;
+  padding-left: 1%;
 }
 
 #close-window:hover {
@@ -113,50 +147,83 @@ main {
   background-color: red;
 }
 
-#taskBar span {
-  width: 3%;
-  font-size: clamp(1.4rem, 1.8vw, 2rem);
-  color: white;
-  font-weight: bolder;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 #navMenu {
-  width: 96%;
+  background-color: #c0c0c0;
+  width: 100%;
   height: 6%;
-  color: rgb(128, 230, 69);
+  color: #111;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding:0 2%;
-  border-bottom-style: dashed;
 }
 
 #navMenu span {
+  width: 15%;
+  height: 75%;
   font-size: clamp(1rem, 1.4vw, 1.6rem);
   font-weight: 500;
-  text-align: center;
-  padding: auto;
   display: flex;
-  align-items:end;
+  align-items: center;
+  justify-content: center;
+  border-top: 2px solid #FFFFFF;
+  border-left: 2px solid #FFFFFF;
+  border-bottom: 2px solid #808080;
+  border-right: 2px solid #808080;
 }
 
 #navMenu span:hover {
-  color:rgb(147, 230, 69) ;
   font-weight: bolder;
   cursor: pointer;
 }
 
-#languages, #preload, #bisComp, #softSkills, #education {
-  width: 96%;
-  height: 86%;
+#navMenu span:active {
+  background-color: #808080;
+}
+
+#languages, #preload, #bisComp, #softSkills, #education, #extra, #jobs {
+  width: 100%;
+  height: 88%;
+  min-height: 0;
   padding: 2%;
   display: flex;
-  flex-direction: column;
   gap: 3%;
+  flex-direction: column;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
+
+/* WASTING TIME FOR 1 SCROLLBAR BECAUSE WHY NOT */
+
+.scroll-bar::-webkit-scrollbar {
+  width: 24px;
+  background: #c8c8c8;
+}
+
+.scroll-bar::-webkit-scrollbar-track {
+  background: #c8c8c8;
+  border-left: 1px solid #ffffff;
+  border-top: 1px solid #ffffff;
+  border-right: 1px solid #7b7b7b;
+  border-bottom: 1px solid #7b7b7b;
+}
+
+.scroll-bar::-webkit-scrollbar-thumb {
+  background: #b0b0b0;
+  border: 2px solid #c8c8c8;
+  border-top-color: #ffffff;
+  border-left-color: #ffffff;
+  border-bottom-color: #7b7b7b;
+  border-right-color: #7b7b7b;
+  
+  box-shadow: inset 1px 1px 0 #ffffff, 
+              inset -1px -1px 0 #7b7b7b;
+}
+
+.scroll-bar::-webkit-scrollbar-thumb:active {
+  background: #9a9a9a;
+}
+
+/* ENOUGH TIME WASTED */
 
 h2{
   font-size: clamp(1.8rem, 2.4vw,2.8rem);
