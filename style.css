@@ -160,7 +160,7 @@ main {
 #navMenu span {
   width: 15%;
   height: 75%;
-  font-size: clamp(1rem, 1.4vw, 1.6rem);
+  font-size: clamp(0.9rem, 1.4vw, 1.3rem);
   font-weight: 500;
   display: flex;
   align-items: center;
