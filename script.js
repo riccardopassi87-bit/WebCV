@@ -117,6 +117,24 @@ $('#close-window').on('click', function () {
 });
 
 /* --------------------------------------------------
+    ENLARGE WINDOW
+-------------------------------------------------- */
+$('#enlarge').on('click', enlarge);
+
+/* --------------------------------------------------
+    MINIMIZE / RE-OPEN WINDOW
+-------------------------------------------------- */
+$('#minimize').on('click', function(){
+    $('#monitor').hide();
+    $('#openMiniWin').show();
+});
+
+$('#re-open').on('click', function(){
+    $('#openMiniWin').hide();
+    $('#monitor').show();
+});
+
+/* --------------------------------------------------
     PRELOADER
 -------------------------------------------------- */
 function preloader() {
@@ -205,4 +223,23 @@ function closeAll(){
     $('#education').hide();
     $('#extra').hide();
     $('#jobs').hide();
+    $('#openMiniWin').hide();
+}
+
+/* --------------------------------------------------
+    ENLARGE WINDOW LOGIK
+-------------------------------------------------- */
+function enlarge(){
+
+    let $monitor = $('#monitor');
+    
+    if($monitor.data('big')){
+        $monitor.animate ({
+            width: '80%', height: '90%'
+        }, 25).data('big', false);
+    }else {
+        $monitor.animate({
+            width: '100%', height: '100%'
+        }, 25).data('big', true);
+    }
 }

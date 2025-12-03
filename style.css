@@ -24,7 +24,9 @@ html {
 
 body {
   font-family: myFont;
-  background-color: #222;
+  background-image: url(assets/bgimage.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 100%;
   min-width: 1240px;
   max-width: 3840px;
@@ -56,9 +58,6 @@ h1 {
 main {
   width: 100%;
   height: 85%;
-  background-image: url(assets/bgimage.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -132,6 +131,14 @@ main {
   border-right: 1px solid #808080;
 }
 
+#enlarge:hover, #minimize:hover{
+  cursor: pointer;
+}
+
+#enlarge:active, #minimize:active{
+  background: #9a9a9a;
+}
+
 #version{
   width: 25%;
   height: 100%;
@@ -189,6 +196,34 @@ main {
   flex-direction: column;
   overflow-y: auto;
   box-sizing: border-box;
+}
+
+#openMiniWin{
+  width: 100%;
+  height: 5%;
+  float: bottom;
+}
+
+#re-open{
+  width: 20%;
+  height: 100%;
+  background-color: #c0c0c0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1%;
+  border-top: 1px solid #FFFFFF;
+  border-left: 1px solid #FFFFFF;
+  border-bottom: 1px solid #808080;
+  border-right: 1px solid #808080;
+}
+
+#re-open:hover{
+  cursor: pointer;
+}
+
+#re-open:active{
+  background-color: #9a9a9a;
 }
 
 /* WASTING TIME FOR 1 SCROLLBAR BECAUSE WHY NOT */
