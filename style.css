@@ -8,22 +8,29 @@
   margin: 0;
 }
 
+button {
+  all: unset;
+}
+
 a {
   all: unset;
 }
 
 html {
+  font-size: 100%;
   width: 100%;
   height: 100%;
 }
 
 body {
   font-family: myFont;
-  background-color: #222;
+  background-image: url(assets/bgimage.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 100%;
   min-width: 1240px;
   max-width: 3840px;
-  min-height: 576px;
+  min-height: 720px;
   max-height: 2160px;
   max-height: 100vh;
   aspect-ratio: 16/9;
@@ -43,7 +50,7 @@ body {
 
 h1 {
   margin-left: 3%;
-  font-size: 400%;
+  font-size: clamp(2rem, 5vw, 5rem);
   font-weight: 100;
   letter-spacing: 25px;
 }
@@ -51,9 +58,6 @@ h1 {
 main {
   width: 100%;
   height: 85%;
-  background-image: url(assets/bgimage.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,10 +67,11 @@ main {
 
 #power{
   background-color: #222;
-  width: 14.5%;
+  width: 14%;
   height: 30%;
   color: white;
-  font-size: 150%;
+  font-size: clamp(1.4rem, 1.8vw, 2rem);
+  text-align: center;
   border-radius: 400px;
 }
 
@@ -75,9 +80,9 @@ main {
 }
 
 #power:active{
-  width: 13%;
-  height: 26.5%;
-  font-size: 135%;
+  width: 12.5%;
+  height: 27%;
+  font-size: clamp(1.2rem, 1.6vw, 1.8rem);
   color: rgb(128, 230, 69);
 }
 
@@ -86,20 +91,62 @@ main {
   height: 90%;
   background-color: #111;
   border-style: solid;
-  border-width: 10px;
-  border-color: rgb(235, 235, 235);
-  border-radius: 5px;
+  border-width: 4px;
+  border-color: #c0c0c0;
+  box-shadow: inset 2px 2px #666; inset: -2px -2px #333;
+  border-radius: 0;
+  overflow: hidden;
   color: rgb(128, 230, 69);
 }
 
 #taskBar {
-  width: 99%;
+  width: 100%;
   height: 6%;
-  padding-right: 1%;
-  background-color: blue;
+  background-color: #000080;
   display: flex;
-  justify-content: flex-end;
-  gap: 1%;
+  justify-content: space-between;
+  border-bottom: 2px solid #808080;
+}
+
+#icons{
+  width: 11%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#icons span{
+  width: 33%;
+  height:100%;
+  background-color: #c0c0c0;
+  font-size: clamp(1.4rem, 1.8vw, 2rem);
+  color: #FFFFFF;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #FFFFFF;
+  border-left: 1px solid #FFFFFF;
+  border-bottom: 1px solid #808080;
+  border-right: 1px solid #808080;
+}
+
+#enlarge:hover, #minimize:hover{
+  cursor: pointer;
+}
+
+#enlarge:active, #minimize:active{
+  background: #9a9a9a;
+}
+
+#version{
+  width: 25%;
+  height: 100%;
+  color: white;
+  font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+  display: flex;
+  align-items: center;
+  padding-left: 1%;
 }
 
 #close-window:hover {
@@ -107,64 +154,130 @@ main {
   background-color: red;
 }
 
-#taskBar span {
-  width: 3%;
-  font-size: 200%;
-  color: white;
-  font-weight: bolder;
+#navMenu {
+  background-color: #c0c0c0;
+  width: 100%;
+  height: 6%;
+  color: #111;
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-
-#navMenu {
-  width: 96%;
-  height: 6%;
-  color: rgb(128, 230, 69);
-  display: flex;
   justify-content: space-between;
-  margin: 0 2%;
 }
 
 #navMenu span {
-  font-size: 150%;
+  width: 15%;
+  height: 75%;
+  font-size: clamp(0.9rem, 1.4vw, 1.3rem);
   font-weight: 500;
-  text-align: center;
-  padding: auto;
   display: flex;
-  align-items:end;
+  align-items: center;
+  justify-content: center;
+  border-top: 2px solid #FFFFFF;
+  border-left: 2px solid #FFFFFF;
+  border-bottom: 2px solid #808080;
+  border-right: 2px solid #808080;
 }
 
 #navMenu span:hover {
-  font-weight: bolder;
   cursor: pointer;
 }
 
-#languages, #preload {
-  width: 96%;
-  height: 86%;
-  padding: 2%;
-  display: flex;
-  flex-direction: column;
-  gap:3%;
+#navMenu span:active {
+  background-color: #9a9a9a;
 }
 
+#languages, #preload, #bisComp, #softSkills, #education, #extra, #jobs {
+  width: 100%;
+  height: 88%;
+  min-height: 0;
+  padding: 2%;
+  display: flex;
+  gap: 3%;
+  flex-direction: column;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+#openMiniWin{
+  width: 100%;
+  height: 5%;
+  float: bottom;
+}
+
+#re-open{
+  width: 20%;
+  height: 100%;
+  background-color: #c0c0c0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1%;
+  border-top: 1px solid #FFFFFF;
+  border-left: 1px solid #FFFFFF;
+  border-bottom: 1px solid #808080;
+  border-right: 1px solid #808080;
+}
+
+#re-open:hover{
+  cursor: pointer;
+}
+
+#re-open:active{
+  background-color: #9a9a9a;
+}
+
+/* WASTING TIME FOR 1 SCROLLBAR BECAUSE WHY NOT */
+
+.scroll-bar::-webkit-scrollbar {
+  width: 24px;
+  background: #c8c8c8;
+}
+
+.scroll-bar::-webkit-scrollbar-track {
+  background: #c8c8c8;
+  border-left: 1px solid #ffffff;
+  border-top: 1px solid #ffffff;
+  border-right: 1px solid #7b7b7b;
+  border-bottom: 1px solid #7b7b7b;
+}
+
+.scroll-bar::-webkit-scrollbar-thumb {
+  background: #b0b0b0;
+  border: 2px solid #c8c8c8;
+  border-top-color: #ffffff;
+  border-left-color: #ffffff;
+  border-bottom-color: #7b7b7b;
+  border-right-color: #7b7b7b;
+  
+  box-shadow: inset 1px 1px 0 #ffffff, 
+              inset -1px -1px 0 #7b7b7b;
+}
+
+.scroll-bar::-webkit-scrollbar-thumb:active {
+  background: #9a9a9a;
+}
+
+/* ENOUGH TIME WASTED */
+
 h2{
-  font-size: 250%;
+  font-size: clamp(1.8rem, 2.4vw,2.8rem);
+  font-weight: lighter;
 }
 
 h3, h4{
   margin-top: 0;
   margin-bottom: 0;
+  font-weight: lighter;
 }
 
 h3{
-  font-size: 180%;
+  font-size: clamp(1.1rem, 1.4vw, 1.6rem);
 }
 
 h4{
-  font-size: 140%;
+  font-size: clamp(1rem, 1.15vw, 1.3rem);
   margin-left: 2%;
+  color: rgb(96, 170, 53);
 }
 
 /* LOWER SECTION */
@@ -176,7 +289,7 @@ h4{
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  font-size: 120%;
+  font-size: clamp(1.1rem, 1.4vw, 1.4rem);
   color: #222;
 }
 

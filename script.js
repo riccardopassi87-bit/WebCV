@@ -6,36 +6,46 @@ let german = true;
 function getLang() {
     return german ? "de" : "en";
 }
-/* --------------------------------------------------
-    LANGUAGE SELECTOR
--------------------------------------------------- */
-$(".lang-selector").on("click", function () {
-    const selected = $(this).data("lang");
-
-    german = (selected === "de");  // keep animation system in sync
-
-    $("[data-lang-group][lang]").hide();
-    $(`[data-lang-group][lang='${selected}']`).show();
-});
 
 /* --------------------------------------------------
     LANGUAGE FLAG BUTTONS
 -------------------------------------------------- */
-$('#german').on('click', function () { german = true; });
-$('#english').on('click', function () { german = false; });
+$('#german').on('click', function (){
+    german = true;
+    updateLanguage();
+});
+
+$('#english').on('click', function (){
+    german = false;
+    updateLanguage();
+});
+
+/* --------------------------------------------------
+    LANGUAGE SELECTOR
+-------------------------------------------------- */
+function updateLanguage() {
+    const lang = getLang();
+    $("[data-lang-group][lang]").hide();
+    $(`[data-lang-group][lang='${lang}']`).show();
+}
 
 /* --------------------------------------------------
     INITIAL STATUS
 -------------------------------------------------- */
 $(document).ready(function () {
-    $("[data-lang-group][lang='en']").hide();
-    $("[data-lang-group][lang='de']").show();
+    updateLanguage();
 
     $('#power').show();
     $('#monitor').hide();
     $('#navMenu').hide();
     $('#preload').hide();
-    $('#languages').hide();
+    closeAll();
+
+    //TEXT CACHE (ALL CONTENT)
+    $('#loadDe, #loadEn, #langDe, #langEn, #compDe, #compEn, #softDe, #softEn, #educDe, #educEn, #extrDe, #extrEn, #jobsDe, #jobsEn').each(function () {
+        $(this).data('origText', $(this).text().trim());
+    });
+
 });
 
 /* --------------------------------------------------
@@ -44,16 +54,56 @@ $(document).ready(function () {
 $('#power').on('click', function () {
     $('#power').hide();
     $('#monitor').show();
-
     $('#preload').show();
     preloader();
 });
 
 /* --------------------------------------------------
-    SHOW LANGUAGES (attach handler correctly)
+    SHOW JOBS
 -------------------------------------------------- */
-$('#open-languages').on('click', function () {
-    showLanguages();
+$('.open-jobs').on('click', function() {
+    closeAll();
+    showContent('jobs', 'job', 'jobsDe', 'jobsEn');
+});
+
+/* --------------------------------------------------
+    SHOW EDUCATION
+-------------------------------------------------- */
+$('.open-education').on('click', function() {
+    closeAll();
+    showContent('education', 'edu', 'educDe', 'educEn');
+});
+
+/* --------------------------------------------------
+    SHOW BIS COMPETENCES
+-------------------------------------------------- */
+$('.open-bis').on('click', function() {
+    closeAll();
+    showContent('bisComp', 'bis', 'compDe', 'compEn');
+});
+
+/* --------------------------------------------------
+    SHOW SOFT SKILLS
+-------------------------------------------------- */
+$('.open-skills').on('click', function() {
+    closeAll();
+    showContent('softSkills', 'skl', 'softDe', 'softEn');
+});
+
+/* --------------------------------------------------
+    SHOW EXTRA SKILLS
+-------------------------------------------------- */
+$('.open-extra').on('click', function() {
+    closeAll();
+    showContent('extra', 'ext', 'extrDe', 'extrEn');
+});
+
+/* --------------------------------------------------
+    SHOW LANGUAGES
+-------------------------------------------------- */
+$('.open-languages').on('click', function() {
+    closeAll();
+    showContent('languages', 'lng', 'langDe', 'langEn');
 });
 
 /* --------------------------------------------------
@@ -63,7 +113,25 @@ $('#close-window').on('click', function () {
     $('#monitor').hide();
     $('#power').show();
     $('#navMenu').hide();
-    $('#languages').hide();
+    closeAll();
+});
+
+/* --------------------------------------------------
+    ENLARGE WINDOW
+-------------------------------------------------- */
+$('#enlarge').on('click', enlarge);
+
+/* --------------------------------------------------
+    MINIMIZE / RE-OPEN WINDOW
+-------------------------------------------------- */
+$('#minimize').on('click', function(){
+    $('#monitor').hide();
+    $('#openMiniWin').show();
+});
+
+$('#re-open').on('click', function(){
+    $('#openMiniWin').hide();
+    $('#monitor').show();
 });
 
 /* --------------------------------------------------
@@ -73,48 +141,57 @@ function preloader() {
     
     const lang = getLang();
     const elementId = lang === "de" ? "loadDe" : "loadEn";
-    const textToAnimate = $("#" + elementId).text();
+    const textToAnimate = $("#" + elementId).data('origText');
     
-    const title = `h4[data-lang-group='start'][lang='${lang}']`;
-
     $("[data-lang-group='start'][lang]").hide();
     $("#" + elementId).show().text('');
 
+    const title = `h4[data-lang-group='start'][lang='${lang}']`;
+
     charAnimation(elementId, textToAnimate, 20, function () {
-        setTimeout(function () {
+        setTimeout(() => {
             $(title).show();
-            setTimeout(function () {
+            setTimeout(() => {
                 $('#preload').hide();
                 $('#navMenu').show();
             }, 1500);
-        }, 250);
+        }, 800);
     });
 }
 
 /* --------------------------------------------------
     LANGUAGE ANIMATION PANEL
 -------------------------------------------------- */
-function showLanguages() {
-    $('#languages').toggle();
+function showContent(boxId, group, case1, case2) {
 
     const lang = getLang();
-    const elementId = lang === "de" ? "langDe" : "langEn";
+    const elementId = lang === "de" ? case1 : case2;
+    $("#" + boxId).show();
+    $(`[data-lang-group='${group}'][lang]`).hide();
 
-    $("#" + elementId).show();                  // show first
-    const textToAnimate = $("#" + elementId).text(); // then read text
-    $("#" + elementId).text(''); 
-
-    const title = `h3[data-lang-group='lng'][lang='${lang}']`;
-    const subtitle = `h4[data-lang-group='lng'][lang='${lang}']`;
-
-    $("[data-lang-group='lng'][lang]").hide();
-    $("#" + elementId).show().text('');
+    const $title = $("#" + elementId);
+    const textToAnimate = $title.data('origText');
+    $title.text('').show();
 
     charAnimation(elementId, textToAnimate, 20, function () {
-        setTimeout(function () {
-            $(title).show();
-            $(subtitle).show();
-        }, 300);
+        
+        const container = $("#" + boxId)[0];
+        container.scrollTop = container.scrollHeight;
+
+        setTimeout(() => {
+            const popItems = $("#" + boxId + " > span").slice(1);
+            const langPopItems = popItems.map(function (){
+                return $(this).children(`[lang='${lang}']`);
+            }).get();
+
+            function showItems(i){
+                if (i > langPopItems.length) return;
+                langPopItems[i].show();
+                container.scrollTop = container.scrollHeight;
+                setTimeout(() => showItems(i + 1), 200);
+            }
+            showItems(0);
+        }, 1000);
     });
 }
 
@@ -129,10 +206,40 @@ function charAnimation(elementId, text, delay, onComplete) {
             $("#" + elementId).append(text.charAt(i));
             i++;
             setTimeout(type, delay);
-        } else {
-            if (onComplete) onComplete();
+        } else if (onComplete) {
+            onComplete();
         }
     }
-
     type();
+}
+
+/* --------------------------------------------------
+    CLOSE ALL CONTENT FALLBACK
+-------------------------------------------------- */
+function closeAll(){
+    $('#languages').hide();
+    $('#bisComp').hide();
+    $('#softSkills').hide();
+    $('#education').hide();
+    $('#extra').hide();
+    $('#jobs').hide();
+    $('#openMiniWin').hide();
+}
+
+/* --------------------------------------------------
+    ENLARGE WINDOW LOGIK
+-------------------------------------------------- */
+function enlarge(){
+
+    let $monitor = $('#monitor');
+    
+    if($monitor.data('big')){
+        $monitor.animate ({
+            width: '80%', height: '90%'
+        }, 25).data('big', false);
+    }else {
+        $monitor.animate({
+            width: '100%', height: '100%'
+        }, 25).data('big', true);
+    }
 }
