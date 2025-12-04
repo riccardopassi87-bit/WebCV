@@ -62,6 +62,7 @@ $('#power').on('click', function () {
     SHOW JOBS
 -------------------------------------------------- */
 $('.open-jobs').on('click', function() {
+    var btn = 
     closeAll();
     showContent('jobs', 'job', 'jobsDe', 'jobsEn');
 });
@@ -243,3 +244,16 @@ function enlarge(){
         }, 25).data('big', true);
     }
 }
+
+/* --------------------------------------------------
+    BUTTON DISABLER
+-------------------------------------------------- */
+$('.navBtn').on('click', function() {
+    let $btn = $(this);
+
+    $btn.addClass('disabled');
+
+    setTimeout(function (){
+        $btn.removeClass('disabled');
+    }, 2000);
+});

@@ -186,6 +186,10 @@ main {
   background-color: #9a9a9a;
 }
 
+.navBtn.disabled {
+  pointer-events: none;
+}
+
 #languages, #preload, #bisComp, #softSkills, #education, #extra, #jobs {
   width: 100%;
   height: 88%;
