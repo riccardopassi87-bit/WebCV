@@ -20,13 +20,11 @@ html {
   font-size: 100%;
   width: 100%;
   height: 100%;
+  background-color: #222;
 }
 
 body {
   font-family: myFont;
-  background-image: url(assets/bgimage.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
   width: 100%;
   min-width: 1240px;
   max-width: 3840px;
@@ -35,6 +33,9 @@ body {
   max-height: 100vh;
   aspect-ratio: 16/9;
   height: auto;
+  background-image: url(assets/bgimage.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* FROM HERE - all background colors are place holders!!! */
