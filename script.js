@@ -13,11 +13,17 @@ function getLang() {
 $('#german').on('click', function (){
     german = true;
     updateLanguage();
+
+    $('.lang-selector').removeClass('active');
+    $(this).addClass('active');
 });
 
 $('#english').on('click', function (){
     german = false;
     updateLanguage();
+
+    $('.lang-selector').removeClass('active');
+    $(this).addClass('active');
 });
 
 /* --------------------------------------------------
@@ -255,5 +261,5 @@ $('.navBtn').on('click', function() {
 
     setTimeout(function (){
         $btn.removeClass('disabled');
-    }, 2000);
+    }, 4000);
 });
